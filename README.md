@@ -23,3 +23,6 @@ cryptlock encrypt folder --wipe
 - Secure wipe
 - Progress bar
 - Integrity check
+
+⚠ DISCLAIMER:
+This tool is for educational purposes.
