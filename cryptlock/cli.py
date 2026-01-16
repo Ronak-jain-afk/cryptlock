@@ -32,7 +32,7 @@ def encrypt_file(filepath,wipe=False):
     temp_zip = None
     
     if is_dir:
-        print("📁 Zipping directory...")
+        print("Zipping directory...")
         temp_zip = zip_directory(filepath)
         filepath = temp_zip
 
@@ -40,7 +40,7 @@ def encrypt_file(filepath,wipe=False):
     confirm = getpass("Confirm password: ")
 
     if password != confirm:
-        print("❌ Passwords do not match")
+        print("Passwords do not match")
         return
 
     salt = secrets.token_bytes(16)
@@ -78,7 +78,7 @@ def encrypt_file(filepath,wipe=False):
 
 
 
-    print("✅ File encrypted:", filepath + ".enc")
+    print("File encrypted:", filepath + ".enc")
     # cleanup temp zip
     if temp_zip:
         os.remove(temp_zip)
@@ -122,7 +122,6 @@ def decrypt_file(filepath):
     iv = raw[16:32]
     signature = raw[32:64]
     rest = raw[64:]
-    # check if folder metadata exists
     if b"\n" in rest:
         meta, ciphertext = rest.split(b"\n", 1)
         folder_name = meta.decode()
@@ -147,11 +146,11 @@ def decrypt_file(filepath):
 
         from cryptography.hazmat.primitives.constant_time import bytes_eq
         if not bytes_eq(expected, signature):
-            print("❌ Wrong password or file corrupted")
+            print("Wrong password or file corrupted")
             return
 
     except Exception:
-        print("❌ Wrong password or file corrupted")
+        print("Wrong password or file corrupted")
         return
 
     decrypted_chunks = []
@@ -170,17 +169,15 @@ def decrypt_file(filepath):
     with open(out_file, "wb") as f:
         f.write(decrypted)
 
-    print("✅ File decrypted:", out_file)
+    print("File decrypted:", out_file)
 
-    # If it's a directory zip
     if out_file.endswith(".zip") and folder_name:
-        print("📂 Extracting directory...")
+        print("Extracting directory...")
         unzip_file(out_file, folder_name)
         os.remove(out_file)
 
-    # delete encrypted file
     os.remove(filepath)
-    print("🗑 Encrypted file deleted")
+    print("Encrypted file deleted")
 
 
 def main():
