@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptlock"
+version = "1.0.0"
+description = "Secure file & directory encryption CLI"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "cryptography",
+    "tqdm"
+]
+
+[project.scripts]
+cryptlock = "cryptlock.cli:main"
