@@ -331,7 +331,7 @@ Examples:
         "--version",
         "-v",
         action="version",
-        version="%(prog)s 1.0.1",
+        version="%(prog)s 1.1.0",
     )
 
     args = parser.parse_args()
