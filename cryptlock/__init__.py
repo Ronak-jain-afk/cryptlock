@@ -1,6 +1,6 @@
 """CryptLock - Secure file and directory encryption CLI tool."""
 
-__version__ = "1.0.2"
+__version__ = "1.1.1"
 __author__ = "Ronak Jain"
 __license__ = "MIT"
 

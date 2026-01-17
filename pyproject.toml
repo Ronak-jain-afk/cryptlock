@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cryptlock"
-version = "1.0.2"
+version = "1.1.1"
 description = "Secure file & directory encryption CLI"
 readme = "README.md"
 license = {text = "MIT"}
