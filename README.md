@@ -1,12 +1,31 @@
-# CryptLock 🔐
+# CryptLock 🔐 v2.0
 
-Secure file & directory encryption CLI using AES-256-CFB with PBKDF2 key derivation.
+Secure file & directory encryption CLI using **AES-256-GCM** with **Argon2id** key derivation.
+
+## Features
+
+- **AES-256-GCM** - Authenticated encryption providing both confidentiality and integrity.
+- **Argon2id** - State-of-the-art memory-hard key derivation (KDF).
+- **True Streaming** - Process multi-terabyte files with minimal RAM usage.
+- **Safe Decryption** - Integrity verification before final file placement.
+- **Rich UI** - Modern CLI interface with beautiful progress bars and status panels.
+- **Directory Support** - Automatically zips and encrypts entire folders.
+- **Backward Compatible** - Can still decrypt v1 files (AES-CFB + PBKDF2).
 
 ## Installation
 
-```bash
-pip install cryptlock
-```
+To install CryptLock locally from the source:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Ronak-jain-afk/cryptlock.git
+   cd cryptlock
+   ```
+
+2. **Install dependencies and the package:**
+   ```bash
+   pip install .
+   ```
 
 ## Usage
 
@@ -35,36 +54,13 @@ cryptlock decrypt myfile.txt.enc
 cryptlock decrypt myfile.txt.enc --keep
 ```
 
-## Features
-
-- **AES-256-CFB encryption** - Industry-standard symmetric encryption
-- **PBKDF2-SHA256** - 600,000 iterations for key derivation (OWASP 2023 recommendation)
-- **HMAC-SHA256** - Integrity verification (Encrypt-then-MAC)
-- **Directory support** - Automatically zips and encrypts folders
-- **Progress bar** - Visual feedback for large files
-- **Cross-platform** - Works on Linux, macOS, and Windows
-- **Secure wipe** - Best-effort secure deletion of original files
-
 ## Security Notes
 
-⚠️ **Important Security Considerations:**
+⚠️ **Important Considerations:**
 
-1. **Secure deletion limitations**: The `--wipe` flag attempts to overwrite files, but this is NOT cryptographically secure on:
-   - SSDs (due to wear leveling)
-   - Copy-on-write filesystems (btrfs, ZFS)
-   - Journaling filesystems
-   
-   For true secure deletion, use full-disk encryption.
-
-2. **Password strength**: Use strong, unique passwords. The tool uses 600,000 PBKDF2 iterations, but weak passwords can still be brute-forced.
-
-3. **Backup your data**: Always maintain backups before encrypting important files.
-
-## Requirements
-
-- Python 3.8+
-- cryptography
-- tqdm
+1. **Secure deletion limitations**: The `--wipe` flag attempts to overwrite files, but this is NOT cryptographically secure on SSDs, Copy-on-write (btrfs, ZFS), or journaling filesystems.
+2. **Password strength**: While Argon2id is robust against brute-force, always use a strong, unique password.
+3. **Backups**: Always keep a backup of critical data before encryption.
 
 ## License
 
@@ -73,5 +69,3 @@ MIT License
 ## Disclaimer
 
 This tool is provided for educational and legitimate security purposes only. The authors are not responsible for any misuse or data loss.
-
-> **Note:** This README and code documentation were generated with assistance from AI.
