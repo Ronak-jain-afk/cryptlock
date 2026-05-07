@@ -1,4 +1,4 @@
-# CryptLock 🔐 v2.0
+# CryptLock 🔐 v3.0
 
 Secure file & directory encryption CLI using **AES-256-GCM** with **Argon2id** key derivation.
 
@@ -6,11 +6,13 @@ Secure file & directory encryption CLI using **AES-256-GCM** with **Argon2id** k
 
 - **AES-256-GCM** - Authenticated encryption providing both confidentiality and integrity.
 - **Argon2id** - State-of-the-art memory-hard key derivation (KDF).
+- **Default Deletion** - Original files are securely wiped by default after encryption (safety first!).
+- **Encrypted Metadata (v4)** - Store original filenames, timestamps, and custom notes inside the vault.
+- **In-place Encryption** - Replace original files with encrypted versions directly.
 - **True Streaming** - Process multi-terabyte files with minimal RAM usage.
-- **Safe Decryption** - Integrity verification before final file placement.
-- **Rich UI** - Modern CLI interface with beautiful progress bars and status panels.
-- **Directory Support** - Automatically zips and encrypts entire folders.
-- **Backward Compatible** - Can still decrypt v1 files (AES-CFB + PBKDF2).
+- **Hidden Vaults** - Hide your data inside standard image files (steganography).
+- **Self-Destruct** - Vaults that automatically delete themselves after one successful decryption.
+- **Rich UI** - Modern CLI interface with progress bars and status panels.
 
 ## Installation
 
@@ -29,43 +31,50 @@ To install CryptLock locally from the source:
 
 ## Usage
 
-### Encrypt a file
+### Encrypt a file (Deletes original by default)
 ```bash
-cryptlock encrypt myfile.txt
+cryptlock encrypt secret.txt
 ```
 
-### Encrypt and wipe original
+### Encrypt and Keep original
 ```bash
-cryptlock encrypt myfile.txt --wipe
+cryptlock encrypt secret.txt --keep
 ```
 
-### Encrypt a directory
+### Encrypt with a Note
 ```bash
-cryptlock encrypt myfolder --wipe
+cryptlock encrypt secret.txt --note "Finance records 2024"
 ```
 
-### Decrypt a file
+### In-place Encryption/Decryption
 ```bash
-cryptlock decrypt myfile.txt.enc
+cryptlock encrypt secret.txt --in-place
+cryptlock decrypt secret.txt --in-place
 ```
 
-### Keep encrypted file after decryption
+### View Vault Info (without decrypting)
 ```bash
-cryptlock decrypt myfile.txt.enc --keep
+cryptlock info secret.txt.enc
+```
+
+### Hidden Vault (Image)
+```bash
+cryptlock encrypt secret.txt --hide my_photo.jpg
+```
+
+### Self-Destructing Vault
+```bash
+cryptlock encrypt secret.txt --self-destruct
 ```
 
 ## Security Notes
 
 ⚠️ **Important Considerations:**
 
-1. **Secure deletion limitations**: The `--wipe` flag attempts to overwrite files, but this is NOT cryptographically secure on SSDs, Copy-on-write (btrfs, ZFS), or journaling filesystems.
-2. **Password strength**: While Argon2id is robust against brute-force, always use a strong, unique password.
+1. **Secure deletion limitations**: CryptLock attempts to overwrite files before deletion, but this is NOT cryptographically secure on SSDs or journaling filesystems.
+2. **Password strength**: While Argon2id is robust, always use a strong password.
 3. **Backups**: Always keep a backup of critical data before encryption.
 
 ## License
 
 MIT License
-
-## Disclaimer
-
-This tool is provided for educational and legitimate security purposes only. The authors are not responsible for any misuse or data loss.

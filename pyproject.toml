@@ -9,7 +9,7 @@ description = "Secure file & directory encryption CLI"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Ronak Jain", email = "ronakjain444l@example.com"}
 ]
 keywords = ["encryption", "aes", "security", "cli", "file-encryption"]
 classifiers = [
@@ -47,10 +47,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/cryptlock"
-Documentation = "https://github.com/yourusername/cryptlock#readme"
-Repository = "https://github.com/yourusername/cryptlock"
-Issues = "https://github.com/yourusername/cryptlock/issues"
+Homepage = "https://github.com/Ronak-jain-afk/cryptlock"
+Documentation = "https://github.com/Ronak-jain-afk/cryptlock#readme"
+Repository = "https://github.com/Ronak-jain-afk/cryptlock"
+Issues = "https://github.com/Ronak-jain-afk/cryptlock/issues"
 
 [project.scripts]
 cryptlock = "cryptlock.cli:main"
